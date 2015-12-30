@@ -76,8 +76,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     YKSSubSpecialCell *cell = [tableView dequeueReusableCellWithIdentifier:@"subSpecialCell" forIndexPath:indexPath];
     YKSSubSpecial *subSpecial = self.datas[indexPath.row];
+    
     cell.subSpecial = subSpecial;
+    //cell title
     cell.titleLabel.text = subSpecial.title;
+    //症状
     cell.contentLabel.text = subSpecial.specialDescription;
     return cell;
 }
@@ -86,7 +89,8 @@
     YKSRecommenViewController *recommenVC=[[YKSRecommenViewController alloc]initWithStyle:UITableViewStyleGrouped];
     YKSSubSpecialCell *cell=[tableView cellForRowAtIndexPath:indexPath];
     recommenVC.specialId = cell.subSpecial.specialId;
-    recommenVC.title=@"药师推荐方案";
+    //标题title
+    recommenVC.title=cell.titleLabel.text;
     recommenVC.formInformation.symptom=cell.subSpecial.title;
     recommenVC.formInformation.symptomInformation=cell.subSpecial.specialDescription;
 //    recommenVC.drugListType = YKSDrugListTypeSpecail;

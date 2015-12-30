@@ -282,7 +282,7 @@
     return YES;
 }
 
-
+//正则表达式
 -(BOOL)isValidate:(NSString *)str{
     //数字，英文，减号
     NSString *strRegex = @"^[-a-zA-Z0-9]+$";

@@ -59,7 +59,7 @@
     [super viewDidAppear:animated];
     if ([YKSUserModel isLogin]) {
         _myCenterTitleLabel.text = [YKSUserModel telePhone];
-        _myCenterLabel.text = @"个人信息中心";
+        _myCenterLabel.text = @"个人健康中心";
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
