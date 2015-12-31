@@ -26,6 +26,7 @@
 @interface YKSDrugDetailViewController () <UITableViewDelegate, ImagePlayerViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 //@property (weak, nonatomic) IBOutlet ImagePlayerView *_headerView;
+@property(nonatomic,assign)NSInteger timer;
 @property (strong, nonatomic) NSArray *imageURLStrings;
 @property (weak, nonatomic) IBOutlet UIButton *shoppingCartButton;
 
@@ -53,7 +54,6 @@
 
 @property(nonatomic,strong)JSBadgeView *badgeView;
 
-@property(nonatomic,strong)NSTimer *timer;//计时器
 @end
 
 @implementation YKSDrugDetailViewController
@@ -124,6 +124,7 @@
     [super viewDidLoad];
     [self nullDrugDisplay];
     _number=0;
+    _timer = -1;
     //NSLog(@"repertory ===== %@",self.repertoryArry);
     
     _headerView.bounds = CGRectMake(0, 0, SCREEN_WIDTH, self.view.bounds.size.height*0.5);
@@ -169,8 +170,6 @@
 //    __headerView.pageControlPosition = ICPageControlPosition_BottomRight;
 //    [self._headerView reloadData];
     
-    //添加计时器
-    [self addScrollViewTimer];
     
     // 购物车图标的数字显示
     
@@ -182,46 +181,37 @@
     [self.shoppingCartButton addSubview:_badgeView];
 }
 
-//滑动结束以后执行，改变pagecontroller的页数
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
     NSInteger page = scrollView.contentOffset.x/SCREEN_WIDTH;
-    _pageControl.currentPage = page;
-}
-//添加计时器
--(void)addScrollViewTimer
-{
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
-}
-//跳转向下一页
--(void)nextPage
-{
-    NSInteger currentPage = self.pageControl.currentPage;
-    currentPage ++;
-    if (currentPage == _imageURLStrings.count) {
-        currentPage = 0;
+    if (page > _timer) {
+        _pageControl.currentPage = page + 1;
+        _timer = _timer + 1;
+        if (_pageControl.currentPage == _imageURLStrings.count - 1) {
+            _timer = _imageURLStrings.count - 1;
+        }
+    }else
+    {
+        
+        _pageControl.currentPage = page;
+        
+        if (_pageControl.currentPage == 0) {
+            _timer = -1;
+        }
     }
-    CGFloat width = self.scrollView.frame.size.width;
-    CGPoint offSet = CGPointMake(currentPage * width, 0);
-    self.scrollView.contentOffset = offSet;
+    
+    if (_scrollView.contentOffset.x == 0) {
+        _pageControl.currentPage = _imageURLStrings.count - 1;
+        _scrollView.contentOffset = CGPointMake((_imageURLStrings.count-1) *SCREEN_WIDTH, 0);
+        _timer = _imageURLStrings.count;
+    }else if (_scrollView.contentOffset.x == (_imageURLStrings.count-1) *SCREEN_WIDTH)
+    {
+        _pageControl.currentPage = 0;
+        _scrollView.contentOffset = CGPointMake(0, 0);
+        _timer = -1;
+    }
+    
 }
-//将要拖拽的时候，移除计时器
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    [self removeScrollTimer];
-}
-//结束拖拽 的时候，添加计时器
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    [self addScrollViewTimer];
-}
-//计时器置为空的方法
-- (void)removeScrollTimer
-{
-    [self.timer invalidate];
-    self.timer = nil;
-}
-
-
 #pragma mark - custom
 - (void)collectAction:(UIButton *)sender {
     if (![YKSUserModel isLogin]) {

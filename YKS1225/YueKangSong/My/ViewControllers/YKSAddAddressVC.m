@@ -263,14 +263,18 @@
     
     [self.view endEditing:YES];
     
-    NSString *name=[YKSTools nameFormatter:_nameField.text];
-    _nameField.text=name;
     if (IS_EMPTY_STRING(_nameField.text)) {
         [self showToastMessage:@"请填写收货人"];
-
+        
         return ;
     }
+    NSString *name=[YKSTools nameFormatter:_nameField.text];
+    _nameField.text=name;
     
+    if ([name isEqualToString:@""]) {
+        [self showToastMessage:@"收货人格式不允许是数字，请重新输入"];
+        return;
+    }
     [self textFieldChange:_nameField];
    // 这样就可以更好地限制输入长度：
     

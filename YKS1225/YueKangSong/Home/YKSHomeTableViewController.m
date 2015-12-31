@@ -53,6 +53,7 @@
 
 @property(nonatomic,strong)NSString *DrugID;
 @property(nonatomic,strong)NSString *DrugID2;
+@property(nonatomic,strong)YKSMyAddressViewcontroller *myVC;
 
 @end
 
@@ -459,20 +460,21 @@
    // 不允许
     if (![YKSUserModel isLogin]) {
         [YKSTools login:self];
-        return ;
+        return;
     }
+    
     __weak id bself = self;
     YKSSelectAddressView *selectAddressView = nil;
     
-    YKSMyAddressViewcontroller *myVC=[[YKSMyAddressViewcontroller alloc]init];
+    _myVC=[[YKSMyAddressViewcontroller alloc]init];
     
-    myVC.hidesBottomBarWhenPushed=YES;
+    _myVC.hidesBottomBarWhenPushed=YES;
     
-    [self.navigationController pushViewController:myVC animated:NO];
+    [self.navigationController pushViewController:_myVC animated:NO];
     
-    myVC.delegate=selectAddressView;
+    _myVC.delegate=selectAddressView;
     
-    selectAddressView = [YKSSelectAddressView showAddressViewToView:myVC.view
+    selectAddressView = [YKSSelectAddressView showAddressViewToView:_myVC.view
                                                               datas:@[[self currentAddressInfo]]
                                                            callback:^(NSDictionary *info, BOOL isCreate) {
        NSDictionary *dic=info;
@@ -582,6 +584,7 @@
 - (IBAction)addressAction:(id)sender {
     //这里会显示地址,我们跟踪拿到选择的地址
     [self showAddressView];
+    
 }
 
 #pragma mark - UITableViewdelegate
@@ -910,6 +913,7 @@
 }
 //#pragma mark - UITableViewDelegate
 #pragma mark - Navigation
+//搜索框
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     UIViewController *aa = segue.destinationViewController;
     aa.hidesBottomBarWhenPushed = YES;

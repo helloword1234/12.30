@@ -606,6 +606,7 @@ UIActionSheetDelegate,UIAlertViewDelegate>
         else
         {
             YKSBuyCouponCell *couponCell = [tableView dequeueReusableCellWithIdentifier:@"BuyCouponCell" forIndexPath:indexPath];
+            
             if (_couponInfo) {
               couponCell.detailTextLabel.text = [NSString stringWithFormat:@"%0.2f优惠劵", [_couponInfo[@"faceprice"] floatValue]];
 //                NSString *couponCount = [NSString stringWithFormat:@"您有%ld张优惠券可以使用",_Count];
