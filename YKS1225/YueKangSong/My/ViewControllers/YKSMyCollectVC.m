@@ -48,6 +48,22 @@
 }
 
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view =[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-30, 30)];
+     view.backgroundColor=[UIColor colorWithRed:(15*16+11)/255.0 green:(16*15+9)/255.0 blue:14*16/255.0 alpha:1.0];
+    UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-30, 30)];
+    
+    lable.textColor=[UIColor colorWithRed:(12*16+14)/255.0 green:(7*16+14)/255.0 blue:(16+13)/255.0 alpha:1.0];
+    
+    lable.textAlignment=NSTextAlignmentCenter;
+    
+    lable.font=[UIFont systemFontOfSize:12];
+    
+    lable.text=@"根据您的地址不同,显示您收藏的药品会有所差异";
+    
+    [view addSubview:lable];
+    return view;
+}
 
 #pragma mark - custom
 - (void)requestDataByPage:(NSInteger)page {
