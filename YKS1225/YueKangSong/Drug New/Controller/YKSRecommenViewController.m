@@ -27,6 +27,7 @@
 
 //判断展开状态
 @property (nonatomic,strong) NSMutableArray *indexArray;
+//合计金额
 @property (assign, nonatomic) CGFloat totalPrice;
 
 @property (assign, nonatomic) BOOL isCreat;
@@ -79,6 +80,7 @@
 //一键加入购物车 代理方法
 - (void)addShopping:(UIButton *)addButton
 {
+    //商品数量
     self.datasArray = [NSMutableArray array];
     [self.datas enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (![obj[@"repertory"] isEqualToString:@"0"] || [obj[@"repertory"] intValue] != 0) {
@@ -281,7 +283,7 @@
 //返回分区
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     //设置方案多少可根据返回的数据
-    return 1;
+    return self.datas.count;
 }
 //返回row项
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
