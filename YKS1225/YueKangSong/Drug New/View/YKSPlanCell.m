@@ -8,6 +8,7 @@
 
 #import "YKSPlanCell.h"
 #import "YKSDetails.h"
+#import "UIViewController+Common.h"
 
 @interface YKSPlanCell ()
 
@@ -20,6 +21,7 @@
     //通过set方法加载控制器传递过来的数组（数组中的数据是从服务器请求的）
     _datas = datas;
     for (int x = 0 ; x < datas.count; x++) {
+        
         if (x > 3) {
             break;
         }
@@ -28,6 +30,7 @@
         UIImageView *image = [[UIImageView alloc]init];
         //datas[x][@"glogo"]是服务器返回的图片的地址
         [image sd_setImageWithURL:[NSURL URLWithString:datas[x][@"glogo"]] placeholderImage:[UIImage imageNamed:@"default160"]];
+        
         CGFloat imageViewY = 20;
         CGFloat imageViewW = (window.bounds.size.width - 64 - 3 * 20)/4;
         CGFloat imageViewH = 65;

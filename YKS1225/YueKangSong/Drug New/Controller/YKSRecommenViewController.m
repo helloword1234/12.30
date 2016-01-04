@@ -81,10 +81,14 @@
 - (void)addShopping:(UIButton *)addButton
 {
     //商品数量
+    
     self.datasArray = [NSMutableArray array];
+  
     [self.datas enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (![obj[@"repertory"] isEqualToString:@"0"] || [obj[@"repertory"] intValue] != 0) {
             [self.datasArray addObject:obj];
+            
+
         }
          NSLog(@"self.datasArray ================= %@",self.datasArray);
 
@@ -92,6 +96,7 @@
     
     if (self.datasArray.count==0) {
         [self showToastMessage:@"没有商品可以加入购物车！！！"];
+        
         return;
     }
     [self jumpAddCard];
@@ -240,12 +245,15 @@
   
         if (!self.specialId) {
             return ;
+            
         }
         [self showProgress];
         [GZBaseRequest subSpecialDetailBy:self.specialId
                                  callback:^(id responseObject, NSError *error) {
                                      [self handleResult:responseObject error:error];
+                                     
                                  }];
+    
     }
 
 
@@ -256,6 +264,7 @@
         [self showToastMessage:@"网络加载失败"];
         return ;
     }
+    
     if (ServerSuccess(responseObject)) {
         NSLog(@"responseObject = %@", responseObject);
         NSDictionary *dic = responseObject[@"data"];
@@ -265,6 +274,8 @@
             NSArray *totalPrices = [_datas valueForKeyPath:@"gprice"];
             if (totalPrices) {
                 _totalPrice = [[totalPrices valueForKeyPath:@"@sum.floatValue"] floatValue];
+                
+                [self showToastMessage:@"uuuuuu"];
             }
 
         }
@@ -283,7 +294,7 @@
 //返回分区
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     //设置方案多少可根据返回的数据
-    return self.datas.count;
+    return 3;
 }
 //返回row项
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
