@@ -375,7 +375,7 @@
     if (![YKSUserModel isLogin]) {
         [YKSTools login:self];
         return;
-    }
+    }else{
     
     UIStoryboard *mainBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     YKSAddAddressVC *vc = [mainBoard instantiateViewControllerWithIdentifier:@"YKSAddAddressVC"];
@@ -384,7 +384,7 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:NO];
 }
-
+}
 #pragma mark alertView delegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex==1) {
