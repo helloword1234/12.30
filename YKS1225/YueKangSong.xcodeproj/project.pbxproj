@@ -164,6 +164,7 @@
 		57C284A61BBB84490038AED9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C284A11BBB84490038AED9 /* FMResultSet.m */; };
 		57C284A91BBB84640038AED9 /* YKSFMDBManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C284A81BBB84640038AED9 /* YKSFMDBManger.m */; };
 		81371BDE1B4A478500BFA4FD /* UIViewController+YKSArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 81371BDD1B4A478500BFA4FD /* UIViewController+YKSArchive.m */; };
+		9345C6731C3B72BA00BD2776 /* meiyou.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9345C6721C3B72BA00BD2776 /* meiyou.jpg */; };
 		9AFE1E8F1C02C8E90052AA9D /* EachGroupDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFE1E8A1C02C8E90052AA9D /* EachGroupDetail.m */; };
 		9AFE1E901C02C8E90052AA9D /* YKSDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFE1E8C1C02C8E90052AA9D /* YKSDetails.m */; };
 		9AFE1E911C02C8E90052AA9D /* YKSFormInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AFE1E8E1C02C8E90052AA9D /* YKSFormInformation.m */; };
@@ -489,6 +490,7 @@
 		57C284A81BBB84640038AED9 /* YKSFMDBManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKSFMDBManger.m; sourceTree = "<group>"; };
 		81371BDC1B4A478500BFA4FD /* UIViewController+YKSArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YKSArchive.h"; sourceTree = "<group>"; };
 		81371BDD1B4A478500BFA4FD /* UIViewController+YKSArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YKSArchive.m"; sourceTree = "<group>"; };
+		9345C6721C3B72BA00BD2776 /* meiyou.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meiyou.jpg; sourceTree = "<group>"; };
 		9AFE1E891C02C8E90052AA9D /* EachGroupDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EachGroupDetail.h; sourceTree = "<group>"; };
 		9AFE1E8A1C02C8E90052AA9D /* EachGroupDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EachGroupDetail.m; sourceTree = "<group>"; };
 		9AFE1E8B1C02C8E90052AA9D /* YKSDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKSDetails.h; sourceTree = "<group>"; };
@@ -842,6 +844,7 @@
 				3E9C45F61B047E95009CAC1D /* YKSDrugListViewController.m */,
 				3E958EBD1B1453CA00A18783 /* YKSSearchController.h */,
 				3E958EBE1B1453CA00A18783 /* YKSSearchController.m */,
+				9345C6721C3B72BA00BD2776 /* meiyou.jpg */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1414,6 +1417,7 @@
 				F31001AB1B94438600E1C822 /* 33.jpg in Resources */,
 				F3D5DBF11B95E693007006EE /* 5.png in Resources */,
 				31E1D0F91BB3E5C7000CDA5E /* dollar.png in Resources */,
+				9345C6731C3B72BA00BD2776 /* meiyou.jpg in Resources */,
 				57B3EF5C1BBB832F004F76F7 /* duihuangray@2x.png in Resources */,
 				F3D5DC021B95E693007006EE /* 分享有礼.png in Resources */,
 				317655571BEA19A4003753DA /* wxwall.png in Resources */,

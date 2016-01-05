@@ -1,3 +1,5 @@
+
+
 //
 //  YKSSearchController.m
 //  YueKangSong
@@ -92,6 +94,8 @@
                               
                               if ([dic count] == 0) {
                                   [self showToastMessage:@"没有相关药品数据"];
+                                  UIImageView *meiyouyaopin =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@""]];
+                                  [self.tableView addSubview:meiyouyaopin];
                                   [_datas removeAllObjects];
                                   [self.tableView reloadData];
                                   return;

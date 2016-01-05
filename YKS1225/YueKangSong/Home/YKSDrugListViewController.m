@@ -83,9 +83,10 @@
 }
 
 #pragma mark - custom
+//点击药品分类没有数据显示一张图片
 - (void)requestSubSpecialList {
     if (!self.specialId) {
-        return ;
+        return;
     }
     [self showProgress];
     if (_drugListType == YKSDrugListTypeSpecail) {
