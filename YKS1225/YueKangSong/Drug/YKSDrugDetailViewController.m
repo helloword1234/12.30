@@ -632,6 +632,9 @@
             self.companyLabel.text = [NSString stringWithFormat:@"/%@",_drugInfo[@"med_unit"]];
             self.companyLabel.frame = CGRectMake(nameCell.priceLabel.frame.origin.x + nameCell.priceLabel.frame.size.width - 5, nameCell.priceLabel.frame.origin.y, 50, nameCell.priceLabel.frame.size.height);
             [nameCell.contentView addSubview:self.companyLabel];
+        }else{
+        priceString =[NSString stringWithFormat:@"￥%0.2f/盒  ", [_drugInfo[@"gprice"] floatValue]];
+            nameCell.priceLabel.text=priceString;
         }
         
         if ([_drugInfo[@"iscollect"] boolValue]) {

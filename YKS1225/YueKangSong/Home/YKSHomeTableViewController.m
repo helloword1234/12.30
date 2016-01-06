@@ -82,9 +82,10 @@
                 _datas = responseObject[@"data"][@"list"];
                 
                 [self.tableView reloadData];
-                [[NSUserDefaults standardUserDefaults] setObject:_datas forKey:@"kHomeDatas"];
+//                [[NSUserDefaults standardUserDefaults] setObject:_datas forKey:@"kHomeDatas"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             } else {
+                
                 [self showToastMessage:responseObject[@"msg"]];
             }
         }];

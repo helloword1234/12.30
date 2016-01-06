@@ -24,17 +24,18 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneField;
 
-
+//所在城市
 @property (weak, nonatomic) IBOutlet UILabel *City_Name;
 
 
-
+//收货地址
 @property (weak, nonatomic) IBOutlet UITextField *streetField; //街道
-
+//门牌号
 @property (weak, nonatomic) IBOutlet UITextField *detailAddressField; //收货地址
 
 
 @property (strong, nonatomic) NSDictionary *areaInfo;
+//删除地址
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property (strong, nonatomic) YKSSearchView *searchView;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cell;
@@ -391,7 +392,7 @@
                                       return ;
                                   }
                                   if (ServerSuccess(responseObject)) {
-                                      [self.navigationController showToastMessage:@"更新成功"];
+//                                      [self.navigationController showToastMessage:@"更新成功"];
                                       [self.navigationController popViewControllerAnimated:YES];
                                       
                                       NSLog(@"更改收货地址成功 = %@", responseObject);
