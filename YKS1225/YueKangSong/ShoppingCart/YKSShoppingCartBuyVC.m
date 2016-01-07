@@ -557,7 +557,7 @@ UIActionSheetDelegate,UIAlertViewDelegate>
         }
         else {
             YKSShoppingBuyTotalInfoCell *totalInfoCell = [tableView dequeueReusableCellWithIdentifier:@"totalInfoCell" forIndexPath:indexPath];
-            totalInfoCell.countLabel.text = [[NSString alloc] initWithFormat:@"共%@件商品", @(_totalCount)];
+            totalInfoCell.countLabel.text = [[NSString alloc] initWithFormat:@"共%@件药品", @(_totalCount)];
             totalInfoCell.freightLabel.text = _freightLabel.text;
             totalInfoCell.priceLabel.text = [[NSString alloc] initWithFormat:@"实付：%0.2f", _totalPrice];
             
