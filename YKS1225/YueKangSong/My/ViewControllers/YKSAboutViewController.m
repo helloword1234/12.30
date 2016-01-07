@@ -19,7 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
-
+//拨打电话
 - (IBAction)phoneAction:(id)sender {
     [YKSTools call:kServerPhone inView:self.view];
 }

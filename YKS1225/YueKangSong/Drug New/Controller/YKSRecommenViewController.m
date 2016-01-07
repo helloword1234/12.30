@@ -240,11 +240,12 @@
 }
 
 
-
+//发送请求药品ID
 - (void)requestSubSpecialList {
   
         if (!self.specialId) {
-            return ;
+            return;
+            
             
         }
         [self showProgress];
@@ -257,17 +258,21 @@
     }
 
 
-
+//执行发送请求药品ID方法
 - (void)handleResult:(id)responseObject error:(NSError *)error {
     [self hideProgress];
     if (error) {
         [self showToastMessage:@"网络加载失败"];
+    
         return ;
     }
     
     if (ServerSuccess(responseObject)) {
         NSLog(@"responseObject = %@", responseObject);
         NSDictionary *dic = responseObject[@"data"];
+        if (dic.count ==0) {
+            [self showToastMessage:@"暂无方案"];
+        }
         if ([dic isKindOfClass:[NSDictionary class]] && dic[@"glist"]) {
             _datas = responseObject[@"data"][@"glist"];
             
@@ -275,8 +280,7 @@
             if (totalPrices) {
                 _totalPrice = [[totalPrices valueForKeyPath:@"@sum.floatValue"] floatValue];
                 
-                [self showToastMessage:@"uuuuuu"];
-            }
+                            }
 
         }
         [self.tableView reloadData];
@@ -294,7 +298,7 @@
 //返回分区
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     //设置方案多少可根据返回的数据
-    return 3;
+    return 1;
 }
 //返回row项
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

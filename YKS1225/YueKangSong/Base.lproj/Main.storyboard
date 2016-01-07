@@ -3596,7 +3596,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sTb-va-ZyX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1545" y="961"/>
+            <point key="canvasLocation" x="1989" y="451"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="KFU-ly-i9Q">
@@ -5338,12 +5338,12 @@
         <image name="间接邀请.png" width="139" height="35"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="7Og-FC-yn7"/>
+        <segue reference="nBh-hM-kvj"/>
+        <segue reference="8Xj-f4-WUK"/>
+        <segue reference="ena-Hn-kQg"/>
+        <segue reference="3mk-1C-4Cj"/>
         <segue reference="jy8-um-db3"/>
         <segue reference="X8J-kY-NHO"/>
-        <segue reference="8Xj-f4-WUK"/>
-        <segue reference="nBh-hM-kvj"/>
-        <segue reference="9kK-ge-HN2"/>
-        <segue reference="Wer-Ei-MDk"/>
-        <segue reference="3mk-1C-4Cj"/>
     </inferredMetricsTieBreakers>
 </document>

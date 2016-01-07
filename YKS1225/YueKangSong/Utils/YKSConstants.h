@@ -38,7 +38,6 @@ static const CGFloat kCycleHeight = 140;
 #define ServerSuccess(x)        (x && ([x[@"code"] integerValue] == 200))
 
 #define kServerPhone @"400-186-6606"
-
 #define kShowWelcome @"1.0"
 
 #define kBaseURLString @"http://api.yuekangsong.com"

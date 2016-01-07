@@ -656,8 +656,7 @@ UIActionSheetDelegate,UIAlertViewDelegate>
         else
         {
             YKSBuyCouponCell *couponCell = [tableView dequeueReusableCellWithIdentifier:@"BuyCouponCell" forIndexPath:indexPath];
-            
-            if (_couponInfo) {
+                       if (_couponInfo) {
            
 //                
 //                NSString *a =[NSString stringWithFormat:@"%@",self.couponInfo[@"fileLimit"]];
@@ -669,7 +668,11 @@ UIActionSheetDelegate,UIAlertViewDelegate>
 //                if ([self.couponInfo[@"condition"]isEqualToString:@""]||(_originTotalPrice >= b))
 //                 
 //                {
+                           couponCell.detailTextLabel.text=@"aaaaaaa";
                                     couponCell.detailTextLabel.text = [NSString stringWithFormat:@"%0.2f优惠劵", [_couponInfo[@"faceprice"] floatValue]];
+                
+                
+                
               //  }
 //                else
 //                {
@@ -687,6 +690,7 @@ UIActionSheetDelegate,UIAlertViewDelegate>
 //                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationFade];
                 
                  NSString *couponCount = [NSString stringWithFormat:@"您有%ld张优惠券可以使用",(long)_Count];
+                
                 couponCell.detailTextLabel.textColor=[UIColor redColor];
                 couponCell.detailTextLabel.text = couponCount;
             } 
