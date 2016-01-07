@@ -33,6 +33,7 @@
 #import "YKSRotaryPopViewController.h"
 #import "YKSAdvertisementController.h"
 #import "YKSScrollView.h"
+#import "AFHTTPSessionManager.h"
 @interface YKSHomeTableViewController () <ImagePlayerViewDelegate,UIAlertViewDelegate,YKSScrollViewDelegate>
 @property (strong, nonatomic) ImagePlayerView *imagePlayview;
 @property (assign, nonatomic) BOOL isShowAddressView;
@@ -53,6 +54,8 @@
 
 @property(nonatomic,strong)NSString *DrugID;
 @property(nonatomic,strong)NSString *DrugID2;
+
+@property(nonatomic,strong)UIImageView *imageView;
 @property(nonatomic,strong)YKSMyAddressViewcontroller *myVC;
 
 @end
@@ -62,13 +65,18 @@
 
 //页面即将加载
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
+    [self viewWillAppearReload];
+}
+
+-(void)viewWillAppearReload
+{
     [self diZhiLuoJiPanDuan];
     
     self.navigationController.navigationBar.hidden=NO;
     self.tabBarController.tabBar.hidden = NO;
     
-    [super viewWillAppear:animated];
     if (!_datas) {
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"kHomeDatas"]) {
             _datas = [[NSUserDefaults standardUserDefaults] objectForKey:@"kHomeDatas"];
@@ -78,14 +86,13 @@
         [GZBaseRequest specialListCallback:^(id responseObject, NSError *error) {
             
             if (ServerSuccess(responseObject)) {
-             
+                
                 _datas = responseObject[@"data"][@"list"];
                 
                 [self.tableView reloadData];
-//                [[NSUserDefaults standardUserDefaults] setObject:_datas forKey:@"kHomeDatas"];
+                [[NSUserDefaults standardUserDefaults] setObject:_datas forKey:@"kHomeDatas"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             } else {
-                
                 [self showToastMessage:responseObject[@"msg"]];
             }
         }];
@@ -95,7 +102,7 @@
         [GZBaseRequest bannerListByMobilephone:@""
                                       callback:^(id responseObject, NSError *error) {
                                           if (error) {
-                                              [self showToastMessage:@"网络加载失败"];
+                                              //                                              [self showToastMessage:@"网络加载失败"];
                                               return ;
                                           }
                                           if (ServerSuccess(responseObject)) {
@@ -103,18 +110,77 @@
                                               
                                               //调用轮播视图方法
                                               [self.scrollView addScrollView:_imageURLStrings];
-                                              }
-                                              
-                                           else {
+                                          }
+                                          
+                                          else {
                                               [self showToastMessage:responseObject[@"msg"]];
                                           }
                                       }];
     }
-  
+}
+
+-(void)running:(UIButton *)button
+{
+    _datas = nil;
+    _imageURLStrings = nil;
+    _drugDatas = nil;
+    [_imageView removeFromSuperview];
+    
+    [self viewDidLoad];
+    [self viewWillAppear:YES];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //判断网络
+    AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];
+    [mgr startMonitoring];
+    
+    //设置网络状态改变后的处理
+    [mgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown:
+            {
+                break;
+            }
+            case AFNetworkReachabilityStatusNotReachable:
+            {
+                
+                _imageView = [[UIImageView alloc] initWithFrame:self.tableView.bounds];
+                _imageView.image = [UIImage imageNamed:@"animation.jpg"];
+                //                self.tableView.userInteractionEnabled = NO;
+                _imageView.userInteractionEnabled = YES;
+                self.tableView.scrollEnabled = NO;
+                
+                //添加button
+                UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
+                button.frame = CGRectMake(10, 60, 80, 40);
+                button.backgroundColor = [UIColor redColor];
+                [button setTitle:@"重新加载" forState:(UIControlStateNormal)];
+                [button addTarget:self action:@selector(running:) forControlEvents:(UIControlEventTouchUpInside)];
+                [_imageView addSubview:button];
+                [self.tableView addSubview:_imageView];
+                break;
+            }
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+            {
+                break;
+            }
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+            {
+                break;
+            }
+        }
+    }];
+    
+    self.tableView.scrollEnabled = YES;
+    [self viewDidLoadReload];
+    
+}
+
+-(void)viewDidLoadReload
+{
     //推出展示广告页面
     [self presentViewController:[[YKSAdvertisementController alloc] init] animated:NO completion:nil];
     self.navigationController.navigationBarHidden = NO;
@@ -129,7 +195,7 @@
     _addressBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH - 10, 25);
     self.navigationItem.title = @"";
     self.tableView.tableHeaderView = [self tableviewHeaderView];
-//    [self startSingleLocationRequest];
+    //    [self startSingleLocationRequest];
     [self requestDrugCategoryList];
     
     
@@ -149,7 +215,8 @@
                                  }
                              }];
     
- }
+    
+}
 
 //地址逻辑判断
 -(void)diZhiLuoJiPanDuan{
