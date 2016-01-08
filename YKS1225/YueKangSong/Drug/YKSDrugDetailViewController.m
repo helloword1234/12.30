@@ -183,32 +183,36 @@
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
-    NSInteger page = scrollView.contentOffset.x/SCREEN_WIDTH;
-    if (page > _timer) {
-        _pageControl.currentPage = page + 1;
-        _timer = _timer + 1;
-        if (_pageControl.currentPage == _imageURLStrings.count - 1) {
-            _timer = _imageURLStrings.count - 1;
+    if (scrollView.superview == self.tableView.tableHeaderView) {
+        NSInteger page = scrollView.contentOffset.x/SCREEN_WIDTH;
+        NSLog(@"page%ld",page);
+        NSLog(@"_timer%ld",_timer);
+        if (page > _timer) {
+            _pageControl.currentPage = page + 1;
+            _timer = _timer + 1;
+            if (_pageControl.currentPage == _imageURLStrings.count - 1) {
+                _timer = _imageURLStrings.count - 1;
+            }
+        }else if(page < _timer)
+        {
+            
+            _pageControl.currentPage = page;
+            
+            if (_pageControl.currentPage == 0) {
+                _timer = -1;
+            }
         }
-    }else
-    {
-        
-        _pageControl.currentPage = page;
-        
-        if (_pageControl.currentPage == 0) {
+        if (_scrollView.contentOffset.x == 0) {
+            _pageControl.currentPage = _imageURLStrings.count - 1;
+            _scrollView.contentOffset = CGPointMake((_imageURLStrings.count-1) *SCREEN_WIDTH, 0);
+            _timer = _imageURLStrings.count;
+        }else if (_scrollView.contentOffset.x == (_imageURLStrings.count-1) *SCREEN_WIDTH)
+        {
+            _pageControl.currentPage = 0;
+            _scrollView.contentOffset = CGPointMake(0, 0);
             _timer = -1;
         }
-    }
-    
-    if (_scrollView.contentOffset.x == 0) {
-        _pageControl.currentPage = _imageURLStrings.count - 1;
-        _scrollView.contentOffset = CGPointMake((_imageURLStrings.count-1) *SCREEN_WIDTH, 0);
-        _timer = _imageURLStrings.count;
-    }else if (_scrollView.contentOffset.x == (_imageURLStrings.count-1) *SCREEN_WIDTH)
-    {
-        _pageControl.currentPage = 0;
-        _scrollView.contentOffset = CGPointMake(0, 0);
-        _timer = -1;
+
     }
     
 }
