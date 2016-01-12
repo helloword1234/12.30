@@ -90,7 +90,7 @@
                 _datas = responseObject[@"data"][@"list"];
                 
                 [self.tableView reloadData];
-//                [[NSUserDefaults standardUserDefaults] setObject:_datas forKey:@"kHomeDatas"];
+                [[NSUserDefaults standardUserDefaults] setObject:_datas forKey:@"kHomeDatas"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             } else {
                 [self showToastMessage:responseObject[@"msg"]];
@@ -153,13 +153,10 @@
                 _imageView.userInteractionEnabled = YES;
                 self.tableView.scrollEnabled = NO;
                 
-                //添加button
-                UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
-                button.frame = CGRectMake(10, 60, 80, 40);
-                button.backgroundColor = [UIColor redColor];
-                [button setTitle:@"重新加载" forState:(UIControlStateNormal)];
-                [button addTarget:self action:@selector(running:) forControlEvents:(UIControlEventTouchUpInside)];
-                [_imageView addSubview:button];
+               
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(running:)];
+                [_imageView addGestureRecognizer:tap];
+                
                 [self.tableView addSubview:_imageView];
                 break;
             }
@@ -264,7 +261,7 @@
 -(void)requestDrugCategoryList{
     [GZBaseRequest drugCategoryListCallback:^(id responseObject, NSError *error) {
         if (error) {
-            [self showToastMessage:@"网络加载失败"];
+//            [self showToastMessage:@"网络加载失败"];
             return ;
         }
         if (ServerSuccess(responseObject)) {
@@ -715,37 +712,39 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-     if (indexPath.section == 0) {
-         if (indexPath.row==2) {
-             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homeCell1" forIndexPath:indexPath];
-                         return cell;
-         }
-         else{
-        NSDictionary *dic;
-        if (_datas.count > indexPath.row) {
-            dic = _datas[indexPath.row];
+    if (indexPath.section == 0) {
+        if (indexPath.row==2) {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homeCell1" forIndexPath:indexPath];
+            return cell;
         }
-        NSString *displaylayout = dic[@"displaylayout"];
-        NSString *identifier = [NSString stringWithFormat:@"homeSpecial%@", displaylayout ? displaylayout : @"1"];
-        YKSHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-        if (dic) {
-            [cell setHomeListInfo:dic];
-        }
-        cell.tapAction = ^(YKSSpecial *special){
-            [self performSegueWithIdentifier:@"gotoSplecialList" sender:special];
+        else{
+            NSDictionary *dic;
+            if (_datas.count > indexPath.row) {
+                dic = _datas[indexPath.row];
+            }
+            NSString *displaylayout = dic[@"displaylayout"];
+            NSString *identifier = [NSString stringWithFormat:@"homeSpecial%@", displaylayout ? displaylayout : @"1"];
+            YKSHomeListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+            if (dic) {
+                [cell setHomeListInfo:dic];
+            }
+            cell.tapAction = ^(YKSSpecial *special){
+                [self performSegueWithIdentifier:@"gotoSplecialList" sender:special];
+                
+            };
             
-        };
-         
-        return cell;
-             
-         }
+            return cell;
+            
+        }
     } else if(indexPath.section==1){
         
+        
         UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"secondCell"];
+        cell = nil;
         
         if (!cell) {
             cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"secondCell"];
-            }
+        }
         
         UIView *view=[[UIView alloc]init];
         view.frame=CGRectMake(0, 56, SCREEN_WIDTH, 1);
@@ -773,66 +772,66 @@
         view4.backgroundColor=[UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
         
         [cell.contentView addSubview:view4];
-
-
         
-    for (int i=0; i<8; i++) {
-
-        UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
         
-        NSString *imageStr=self.imageArray[i];
-      
         
-        [btn sd_setImageWithURL:[NSURL URLWithString:imageStr] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"scrennshot"]];
-        
-        btn.frame=CGRectMake(15+i%2*(SCREEN_WIDTH/2), 10+(i/2)*56, 35, 35);
-       
-        [cell.contentView addSubview:btn];
-        
-        UILabel *nameLable=[[UILabel alloc]initWithFrame:CGRectMake(btn.frame.origin.x+10+35, 6+btn.frame.origin.y, SCREEN_WIDTH/5, 10)];
-        UILabel *descLable=[[UILabel alloc]initWithFrame:CGRectMake(btn.frame.origin.x+10+35, nameLable.frame.origin.y+13, SCREEN_WIDTH/4+15, 20)];
-        descLable.numberOfLines=0;
-        
-        if (SCREEN_WIDTH == 320)
-        {
-            nameLable.font=[UIFont systemFontOfSize:12];
-            descLable.font = [UIFont systemFontOfSize:10];
+        for (int i=0; i<8; i++) {
+            
+            UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
+            
+            NSString *imageStr=self.imageArray[i];
+            
+            
+            [btn sd_setImageWithURL:[NSURL URLWithString:imageStr] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"scrennshot"]];
+            
+            btn.frame=CGRectMake(15+i%2*(SCREEN_WIDTH/2), 10+(i/2)*56, 35, 35);
+            
+            [cell.contentView addSubview:btn];
+            
+            UILabel *nameLable=[[UILabel alloc]initWithFrame:CGRectMake(btn.frame.origin.x+10+35, 6+btn.frame.origin.y, SCREEN_WIDTH/5, 10)];
+            UILabel *descLable=[[UILabel alloc]initWithFrame:CGRectMake(btn.frame.origin.x+10+35, nameLable.frame.origin.y+13, SCREEN_WIDTH/4+15, 20)];
+            descLable.numberOfLines=0;
+            
+            if (SCREEN_WIDTH == 320)
+            {
+                nameLable.font=[UIFont systemFontOfSize:12];
+                descLable.font = [UIFont systemFontOfSize:10];
+            }
+            else if (SCREEN_WIDTH == 375)
+            {
+                nameLable.font = [UIFont systemFontOfSize:14];
+                descLable.font =[UIFont systemFontOfSize:12];
+            }
+            else if (SCREEN_WIDTH == 414)
+            {
+                nameLable.font = [UIFont systemFontOfSize:15];
+                descLable.font = [UIFont systemFontOfSize:13];
+            }
+            nameLable.text=self.nameArray[i];
+            
+            [cell.contentView addSubview:nameLable];
+            
+            
+            
+            
+            
+            
+            //  descLable.font=[UIFont systemFontOfSize:9];
+            
+            descLable.text=self.descArray[i];
+            
+            [cell.contentView addSubview:descLable];
+            
+            UIButton *btn2=[UIButton buttonWithType:UIButtonTypeCustom];
+            
+            btn2.frame=CGRectMake(i%2*SCREEN_WIDTH/2, i/2*56, SCREEN_WIDTH/2, 56);
+            
+            [btn2 addTarget:self action:@selector(sectionTwoClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            btn2.tag=777+i;
+            
+            [cell.contentView addSubview:btn2];
         }
-        else if (SCREEN_WIDTH == 375)
-        {
-            nameLable.font = [UIFont systemFontOfSize:14];
-            descLable.font =[UIFont systemFontOfSize:12];
-        }
-        else if (SCREEN_WIDTH == 414)
-        {
-            nameLable.font = [UIFont systemFontOfSize:15];
-            descLable.font = [UIFont systemFontOfSize:13];
-        }
-        nameLable.text=self.nameArray[i];
-        
-        [cell.contentView addSubview:nameLable];
-        
-
-        
-        
-        
-        
-      //  descLable.font=[UIFont systemFontOfSize:9];
-        
-        descLable.text=self.descArray[i];
-        
-        [cell.contentView addSubview:descLable];
-        
-        UIButton *btn2=[UIButton buttonWithType:UIButtonTypeCustom];
-        
-        btn2.frame=CGRectMake(i%2*SCREEN_WIDTH/2, i/2*56, SCREEN_WIDTH/2, 56);
-        
-        [btn2 addTarget:self action:@selector(sectionTwoClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        btn2.tag=777+i;
-        
-        [cell.contentView addSubview:btn2];
-    }
         return cell;
     }
     else{
@@ -840,16 +839,18 @@
         cell.contentView.backgroundColor=[UIColor whiteColor];
         return cell;
     }
-   }
-
-
+    
+    _imageArray = nil;
+    _descArray = nil;
+    _nameArray = nil;
+}
 //首页数据
 
 -(void)requestData{
 
 [GZBaseRequest drugCategoryListCallback:^(id responseObject, NSError *error) {
     if (error) {
-        [self showToastMessage:@"网络加载失败"];
+//        [self showToastMessage:@"网络加载失败"];
         return ;
     }
     if (ServerSuccess(responseObject)) {
@@ -897,7 +898,6 @@
     vc.drugListType = YKSDrugListTypeCategory;
     vc.title = dic[@"title"];
     
-
     [self.navigationController pushViewController:vc animated:YES];
 }
 
