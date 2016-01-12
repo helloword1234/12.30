@@ -162,7 +162,7 @@
                                       
                                       UILabel *dJlabel3 = [[UILabel alloc]initWithFrame:CGRectMake(Btn1.bounds.size.width-55,Btn1.bounds.size.height/2,50, 20)];
                                       NSString *string1 = times[0];
-                                      dJlabel3.text=[string1 substringFromIndex:11];
+                                      dJlabel3.text=[string1 substringWithRange:NSMakeRange(11, 5)];
                                       dJlabel3.font=[UIFont systemFontOfSize:14];
                                       dJlabel3.textColor = [UIColor  colorWithRed:134/255.0 green:135/255.0 blue:136/255.0 alpha:1];
                                       
@@ -187,7 +187,7 @@
                                       
                                       UILabel *kDlabel3 = [[UILabel alloc]initWithFrame:CGRectMake(Btn2.bounds.size.width-55, Btn2.bounds.size.height/2,50, 20)];
                                       NSString *string2 = times[1];
-                                      kDlabel3.text=[string2 substringFromIndex:11];
+                                      kDlabel3.text=[string2 substringWithRange:NSMakeRange(11, 5)];
                                       kDlabel3.font=[UIFont systemFontOfSize:14];
                                       kDlabel3.textColor = [UIColor  colorWithRed:134/255.0 green:135/255.0 blue:136/255.0 alpha:1];
                                       
@@ -215,7 +215,7 @@
                                       
                                       UILabel *qSlabel3 = [[UILabel alloc]initWithFrame:CGRectMake(Btn2.bounds.size.width-55, Btn3.bounds.size.height/2,50, 20)];
                                       NSString *string3 = times[2];
-                                      qSlabel3.text=[string3 substringFromIndex:11];
+                                      qSlabel3.text=[string3 substringWithRange:NSMakeRange(11, 5)];
                                       qSlabel3.font=[UIFont systemFontOfSize:14];
                                       qSlabel3.textColor = [UIColor  colorWithRed:134/255.0 green:135/255.0 blue:136/255.0 alpha:1];
                                       
