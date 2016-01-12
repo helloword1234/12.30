@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor clearColor];
 
     NSString *str = @"http://api.yuekangsong.com/activity/index?op_type=indexpage";
     NSURL *urlStr = [NSURL URLWithString:str];
@@ -70,6 +70,6 @@
 - (void)dismisss
 {
     [self.timer1 invalidate];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 @end

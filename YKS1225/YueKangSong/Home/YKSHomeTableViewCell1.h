@@ -11,9 +11,9 @@
 @interface YKSHomeTableViewCell1 : UITableViewCell
 
 
+//测试代码
 
-
--(void)setWithDict:(NSDictionary *)dic;
+//-(void)setWithDict:(NSDictionary *)dic;
 
 
 @end

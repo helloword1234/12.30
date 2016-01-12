@@ -84,7 +84,9 @@
                                       
                                       
                                       // 状态栏承载体
-                                      UIView *timeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/5,240)];
+                                      UIView *timeView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/4,240)];
+                                      
+                                       //         timeline.viewheight = 160;
                                       //timeView.backgroundColor=[UIColor redColor];
                                       
                                       //文字描述＋时间承载体
