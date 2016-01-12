@@ -40,9 +40,9 @@ static const CGFloat kCycleHeight = 140;
 #define kServerPhone @"400-186-6606"
 #define kShowWelcome @"1.0"
 
-//#define kBaseURLString @"http://api.yuekangsong.com"
+#define kBaseURLString @"http://api.yuekangsong.com"
 
-#define kBaseURLString @"http://123.57.175.170"
+//#define kBaseURLString @"http://123.57.175.170"
 
 #define ClientKey @"ios_yks_client" 
 #define BaiduMapGeocoderApi @"http://api.map.baidu.com/geocoder/v2/" //http://developer.baidu.com/map/index.php?title=webapi/guide/webservice-geocoding

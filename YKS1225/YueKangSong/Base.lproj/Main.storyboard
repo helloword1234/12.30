@@ -1794,18 +1794,18 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outletCollection property="specialViews" destination="ZTr-8E-Vah" id="2lX-qJ-j9T"/>
-                                    <outletCollection property="specialViews" destination="z32-fX-s7Y" id="ydh-OB-izC"/>
                                     <outletCollection property="imageViews" destination="4HM-kx-h0C" id="hU4-2a-McZ"/>
                                     <outletCollection property="nameLabels" destination="G48-3u-F4a" id="iFb-tq-rPJ"/>
-                                    <outletCollection property="specialViews" destination="bJb-Hq-9fk" id="Beh-cn-JJV"/>
-                                    <outletCollection property="specialViews" destination="nEr-RW-r6w" id="dzy-Ed-SPi"/>
                                     <outletCollection property="nameLabels" destination="ghM-6u-0dJ" id="Hct-vx-GNS"/>
                                     <outletCollection property="imageViews" destination="Rst-88-Euy" id="Q5t-qa-ZBc"/>
                                     <outletCollection property="nameLabels" destination="QFS-Dm-jH2" id="C2T-GX-ZdS"/>
                                     <outletCollection property="nameLabels" destination="O2D-RY-eQN" id="UOy-mK-v7q"/>
                                     <outletCollection property="imageViews" destination="eq6-DZ-hIg" id="D8B-8W-UFo"/>
                                     <outletCollection property="imageViews" destination="e0C-Ct-Xpq" id="Tr8-x1-pJc"/>
+                                    <outletCollection property="specialViews" destination="ZTr-8E-Vah" id="zFg-rX-CkR"/>
+                                    <outletCollection property="specialViews" destination="bJb-Hq-9fk" id="4af-0U-uHH"/>
+                                    <outletCollection property="specialViews" destination="z32-fX-s7Y" id="ahm-cY-2ii"/>
+                                    <outletCollection property="specialViews" destination="nEr-RW-r6w" id="d1T-Ax-j8N"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="homeSpecial2" rowHeight="76" id="b6r-gz-NCC" customClass="YKSHomeListSpecialTwoCell">
