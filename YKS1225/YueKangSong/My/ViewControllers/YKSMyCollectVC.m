@@ -20,6 +20,7 @@
 @property (assign, nonatomic) NSInteger page;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayout;
+//点击编辑之后尾部视图
 @property (weak, nonatomic) IBOutlet YKSTopLineView *bottomView;
 @property (weak, nonatomic) IBOutlet UIButton *allSelectedButton;
 
@@ -46,7 +47,6 @@
     }];
     self.tableView.footer.hidden = YES;
 }
-
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view =[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-30, 30)];
@@ -139,6 +139,7 @@
 }
 
 #pragma mark - IBOutlets
+//编辑和完成按钮
 - (IBAction)edit:(UIBarButtonItem *)sender {
     if (self.tableView.editing) {
         [sender setTitle:@"编辑"];
@@ -152,7 +153,7 @@
         [self.tableView setEditing:YES animated:YES];
     }
 }
-
+//点击编辑之后的全选按钮
 - (IBAction)selectAllAction:(UIButton *)sender {
     sender.selected = !sender.selected;
     if (sender.selected) {
@@ -167,7 +168,7 @@
         }
     }
 }
-
+//点击编辑之后的取消收藏按钮
 - (IBAction)cancelCollectAction:(id)sender {
     NSArray *array = [self.tableView indexPathsForSelectedRows];
     NSMutableArray *gids = [NSMutableArray new];
@@ -222,7 +223,7 @@
         vc.drugInfo = _datas[indexPath.row];
         
         [self.navigationController pushViewController:vc animated:YES];
-    }
+            }
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
